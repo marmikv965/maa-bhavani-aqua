@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Admin Panel – Maa Bhavani Aqua Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/admin.css"/>
+<link rel="icon" type="image/png" href="../images/justlogo.png"/>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <img src="../images/logo.jpeg" alt="MBA"/>
+    <div>
+      <div class="brand">MAA BHAVANI</div>
+      <div class="sub">Admin Panel</div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">Main</div>
+    <a class="nav-link active" data-page="dashboard" onclick="navigate('dashboard')"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span> Dashboard</a>
+    <a class="nav-link" data-page="enquiries" onclick="navigate('enquiries')"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span> Enquiries</a>
+
+    <div class="nav-section">Content</div>
+    <a class="nav-link" data-page="products" onclick="navigate('products')"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></span> Products</a>
+    <a class="nav-link" data-page="solutions" onclick="navigate('solutions')"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></span> Solutions</a>
+    <a class="nav-link" data-page="industries" onclick="navigate('industries')"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></span> Industries</a>
+    <a class="nav-link" data-page="brands" onclick="navigate('brands')"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span> Brands</a>
+    <a class="nav-link" data-page="resources" onclick="navigate('resources')"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></span> Resources</a>
+    <a class="nav-link" data-page="banners" onclick="navigate('banners')"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></span> Banners</a>
+    <a class="nav-link" data-page="herovideo" onclick="navigate('herovideo')"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23,7 16,12 23,17"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span> Hero Video</a>
+
+    <div class="nav-section">System</div>
+    <a class="nav-link" data-page="settings" onclick="navigate('settings')"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span> Settings</a>
+    <a class="nav-link" data-page="account" onclick="navigate('account')"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> My Account</a>
+    <a class="nav-link" href="../index.html"><span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></span> View Website</a>
+  </nav>
+  <div class="sidebar-footer">
+    Logged in as <strong class="admin-name">Admin</strong><br/>
+    <a href="#" onclick="logout()" style="color:#e53e3e;">Sign Out</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <button class="btn btn-outline btn-sm" id="menuToggle" style="display:none;" onclick="document.getElementById('sidebar').classList.toggle('open')"></button>
+      <h1 id="pageTitle">Dashboard</h1>
+    </div>
+    <div class="topbar-right">
+      <a href="../index.html" class="btn btn-outline btn-sm">View Website</a>
+      <div class="avatar admin-initial">A</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div id="section-dashboard" class="admin-section">
+      <div class="stats-grid">
+        <div class="stat-card"><div class="label">Total Enquiries</div><div class="value" id="statEnquiries">—</div><div class="change">All time</div></div>
+        <div class="stat-card"><div class="label">New Enquiries</div><div class="value" id="statNew">—</div><div class="change">Awaiting reply</div></div>
+        <div class="stat-card"><div class="label">Products Listed</div><div class="value" id="statProducts">—</div><div class="change">Active products</div></div>
+        <div class="stat-card"><div class="label">Website Status</div><div class="value" style="font-size:1.4rem;color:var(--success);">Live</div><div class="change">All pages working</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Recent Enquiries</h3><button class="btn btn-sm btn-outline" onclick="navigate('enquiries')">View All</button></div>
+        <table><thead><tr><th>Name</th><th>Phone</th><th>Product</th><th>Status</th><th>Date</th></tr></thead>
+        <tbody id="recentEnquiries"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- ENQUIRIES -->
+    <div id="section-enquiries" class="admin-section" style="display:none;">
+      <div class="filter-bar">
+        <button class="filter-btn active" data-enq-filter="all" onclick="loadEnquiries('all')">All</button>
+        <button class="filter-btn" data-enq-filter="new" onclick="loadEnquiries('new')">New</button>
+        <button class="filter-btn" data-enq-filter="read" onclick="loadEnquiries('read')">Read</button>
+        <button class="filter-btn" data-enq-filter="replied" onclick="loadEnquiries('replied')">Replied</button>
+        <button class="filter-btn" data-enq-filter="closed" onclick="loadEnquiries('closed')">Closed</button>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>All Enquiries</h3></div>
+        <table><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Product</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="enquiriesTable"><tr><td colspan="7" class="empty">Loading...</td></tr></tbody></table>
+      </div>
+      <div id="enquiryPagination" class="pagination"></div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div id="section-products" class="admin-section" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <div class="filter-bar" style="margin-bottom:0;">
+          <button class="filter-btn active" data-prod-filter="all" onclick="loadProducts('all')">All</button>
+          <button class="filter-btn" data-prod-filter="membranes" onclick="loadProducts('membranes')">Membranes</button>
+          <button class="filter-btn" data-prod-filter="chemicals" onclick="loadProducts('chemicals')">Chemicals</button>
+          <button class="filter-btn" data-prod-filter="antiscalants" onclick="loadProducts('antiscalants')">Antiscalants</button>
+          <button class="filter-btn" data-prod-filter="resins" onclick="loadProducts('resins')">Resins</button>
+          <button class="filter-btn" data-prod-filter="filter-cartridges" onclick="loadProducts('filter-cartridges')">Cartridges</button>
+          <button class="filter-btn" data-prod-filter="industrial-spares" onclick="loadProducts('industrial-spares')">Spares</button>
+        </div>
+        <button class="btn btn-primary" onclick="openNewProduct()">+ Add Product</button>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Products</h3></div>
+        <table><thead><tr><th>Product</th><th>Category</th><th>Description</th><th>Tags</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="productsTable"><tr><td colspan="6" class="empty">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- SOLUTIONS (read-only list with edit coming from backend) -->
+    <div id="section-solutions" class="admin-section" style="display:none;">
+      <div class="card">
+        <div class="card-header"><h3>Solutions</h3><button class="btn btn-primary btn-sm" onclick="openNewSolution()">+ Add Solution</button></div>
+        <table><thead><tr><th>Title</th><th>Slug</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="solutionsTable"><tr><td colspan="4" class="empty">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- INDUSTRIES -->
+    <div id="section-industries" class="admin-section" style="display:none;">
+      <div class="card">
+        <div class="card-header"><h3>Industries</h3><button class="btn btn-primary btn-sm" onclick="openNewIndustry()">+ Add Industry</button></div>
+        <table><thead><tr><th>Title</th><th>Slug</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="industriesTable"><tr><td colspan="4" class="empty">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- BRANDS -->
+    <div id="section-brands" class="admin-section" style="display:none;">
+      <div class="card">
+        <div class="card-header"><h3>Brands</h3><button class="btn btn-primary btn-sm" onclick="openNewBrand()">+ Add Brand</button></div>
+        <table><thead><tr><th>Name</th><th>Description</th><th>Website</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="brandsTable"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- RESOURCES -->
+    <div id="section-resources" class="admin-section" style="display:none;">
+      <div class="card">
+        <div class="card-header"><h3>Resources &amp; Downloads</h3><button class="btn btn-primary btn-sm" onclick="openNewResource()">+ Add Resource</button></div>
+        <table><thead><tr><th>Title</th><th>Category</th><th>File</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="resourcesTable"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- BANNERS -->
+    <div id="section-banners" class="admin-section" style="display:none;">
+      <div class="card">
+        <div class="card-header"><h3>Hero Banners</h3><button class="btn btn-primary btn-sm" onclick="openNewBanner()">+ Add Banner</button></div>
+        <table><thead><tr><th>Title</th><th>Subtitle</th><th>CTA 1</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="bannersTable"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- HERO VIDEO -->
+    <div id="section-herovideo" class="admin-section" style="display:none;">
+      <p style="margin-bottom:1.25rem;color:#666;font-size:.9rem;max-width:700px;">Each of the 4 homepage slides can have its own background video. When a slide rotates in, its video plays; if a slide has no video, it falls back to the default gradient background. Recommended: MP4, max 50MB, landscape 16:9.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;max-width:1000px;">
+        <div class="card" data-hero-slot="1">
+          <div class="card-header"><h3>Slide 1 Video</h3></div>
+          <div style="padding:1.5rem;">
+            <div class="hero-video-preview" style="margin-bottom:1rem;background:#000;border-radius:8px;overflow:hidden;display:none;"><video class="hero-video-el" controls style="width:100%;max-height:200px;display:block;"></video></div>
+            <div class="form-group"><label>Upload Video File</label><input type="file" class="hero-video-file" accept="video/mp4,video/webm,video/ogg"/></div>
+            <div class="form-group"><label>Or enter Video URL</label><input type="url" class="hero-video-url" placeholder="https://example.com/video.mp4"/></div>
+            <div style="display:flex;gap:.75rem;margin-top:1rem;">
+              <button class="btn btn-primary" onclick="saveHeroVideo(1)">Save &amp; Apply</button>
+              <button class="btn btn-outline" onclick="clearHeroVideo(1)">Remove</button>
+            </div>
+            <p class="hero-video-status" style="margin-top:.75rem;font-size:.85rem;color:var(--success);display:none;"></p>
+          </div>
+        </div>
+        <div class="card" data-hero-slot="2">
+          <div class="card-header"><h3>Slide 2 Video</h3></div>
+          <div style="padding:1.5rem;">
+            <div class="hero-video-preview" style="margin-bottom:1rem;background:#000;border-radius:8px;overflow:hidden;display:none;"><video class="hero-video-el" controls style="width:100%;max-height:200px;display:block;"></video></div>
+            <div class="form-group"><label>Upload Video File</label><input type="file" class="hero-video-file" accept="video/mp4,video/webm,video/ogg"/></div>
+            <div class="form-group"><label>Or enter Video URL</label><input type="url" class="hero-video-url" placeholder="https://example.com/video.mp4"/></div>
+            <div style="display:flex;gap:.75rem;margin-top:1rem;">
+              <button class="btn btn-primary" onclick="saveHeroVideo(2)">Save &amp; Apply</button>
+              <button class="btn btn-outline" onclick="clearHeroVideo(2)">Remove</button>
+            </div>
+            <p class="hero-video-status" style="margin-top:.75rem;font-size:.85rem;color:var(--success);display:none;"></p>
+          </div>
+        </div>
+        <div class="card" data-hero-slot="3">
+          <div class="card-header"><h3>Slide 3 Video</h3></div>
+          <div style="padding:1.5rem;">
+            <div class="hero-video-preview" style="margin-bottom:1rem;background:#000;border-radius:8px;overflow:hidden;display:none;"><video class="hero-video-el" controls style="width:100%;max-height:200px;display:block;"></video></div>
+            <div class="form-group"><label>Upload Video File</label><input type="file" class="hero-video-file" accept="video/mp4,video/webm,video/ogg"/></div>
+            <div class="form-group"><label>Or enter Video URL</label><input type="url" class="hero-video-url" placeholder="https://example.com/video.mp4"/></div>
+            <div style="display:flex;gap:.75rem;margin-top:1rem;">
+              <button class="btn btn-primary" onclick="saveHeroVideo(3)">Save &amp; Apply</button>
+              <button class="btn btn-outline" onclick="clearHeroVideo(3)">Remove</button>
+            </div>
+            <p class="hero-video-status" style="margin-top:.75rem;font-size:.85rem;color:var(--success);display:none;"></p>
+          </div>
+        </div>
+        <div class="card" data-hero-slot="4">
+          <div class="card-header"><h3>Slide 4 Video</h3></div>
+          <div style="padding:1.5rem;">
+            <div class="hero-video-preview" style="margin-bottom:1rem;background:#000;border-radius:8px;overflow:hidden;display:none;"><video class="hero-video-el" controls style="width:100%;max-height:200px;display:block;"></video></div>
+            <div class="form-group"><label>Upload Video File</label><input type="file" class="hero-video-file" accept="video/mp4,video/webm,video/ogg"/></div>
+            <div class="form-group"><label>Or enter Video URL</label><input type="url" class="hero-video-url" placeholder="https://example.com/video.mp4"/></div>
+            <div style="display:flex;gap:.75rem;margin-top:1rem;">
+              <button class="btn btn-primary" onclick="saveHeroVideo(4)">Save &amp; Apply</button>
+              <button class="btn btn-outline" onclick="clearHeroVideo(4)">Remove</button>
+            </div>
+            <p class="hero-video-status" style="margin-top:.75rem;font-size:.85rem;color:var(--success);display:none;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="section-settings" class="admin-section" style="display:none;">
+      <div class="card">
+        <div class="card-header"><h3>Site Settings</h3></div>
+        <div style="padding:1.5rem;">
+          <form id="settingsForm" onsubmit="saveSettings(event)">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Site Name</label>
+                <input type="text" id="setting_site_name" data-setting-key="site_name" placeholder="Maa Bhavani Aqua Solutions"/>
+              </div>
+              <div class="form-group">
+                <label>Tagline</label>
+                <input type="text" id="setting_tagline" data-setting-key="tagline" placeholder="Purity Powered by Trust"/>
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" id="setting_phone" data-setting-key="phone" placeholder="+91 99999 99999"/>
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="setting_email" data-setting-key="email" placeholder="info@maabhavaniaqua.com"/>
+              </div>
+              <div class="form-group">
+                <label>WhatsApp Number</label>
+                <input type="text" id="setting_whatsapp" data-setting-key="whatsapp" placeholder="+91 99999 99999"/>
+              </div>
+              <div class="form-group full">
+                <label>Address</label>
+                <input type="text" id="setting_address" data-setting-key="address" placeholder="Full address"/>
+              </div>
+              <div class="form-group full">
+                <label>Meta Description</label>
+                <textarea id="setting_meta_description" data-setting-key="meta_description" placeholder="SEO meta description"></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top:1rem;">Save Settings</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCOUNT -->
+    <div id="section-account" class="admin-section" style="display:none;">
+      <div class="card" style="max-width:500px;">
+        <div class="card-header"><h3>Change Password</h3></div>
+        <div style="padding:1.5rem;">
+          <form onsubmit="changePassword(event)">
+            <div class="form-group">
+              <label>Current Password</label>
+              <input type="password" id="currentPass" required placeholder="Your current password"/>
+            </div>
+            <div class="form-group">
+              <label>New Password</label>
+              <input type="password" id="newPass" required minlength="8" placeholder="Minimum 8 characters"/>
+            </div>
+            <div class="form-group">
+              <label>Confirm New Password</label>
+              <input type="password" id="confirmPass" required placeholder="Repeat new password"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Password</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<!-- ENQUIRY DETAIL MODAL -->
+<div class="modal-overlay" id="enqModal">
+  <div class="modal">
+    <div class="modal-header"><h2>Enquiry Details</h2><button class="modal-close">×</button></div>
+    <div id="enqDetail"></div>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal">
+    <div class="modal-header"><h2 id="prodFormTitle">Add Product</h2><button class="modal-close">×</button></div>
+    <form id="productForm" onsubmit="event.preventDefault();saveProduct();">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Product Name *</label>
+          <input type="text" id="prodName" required placeholder="e.g. BW30-4040 RO Membrane"/>
+        </div>
+        <div class="form-group">
+          <label>Category *</label>
+          <select id="prodCategory" required>
+            <option value="">Select category</option>
+            <option value="membranes">Membranes</option>
+            <option value="chemicals">Chemicals</option>
+            <option value="antiscalants">Antiscalants</option>
+            <option value="resins">Resins</option>
+            <option value="filter-cartridges">Filter Cartridges</option>
+            <option value="industrial-spares">Industrial Spares</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Product Icon (optional emoji or leave blank)</label>
+          <input type="text" id="prodIcon" placeholder=""/>
+        </div>
+        <div class="form-group">
+          <label>Tags (comma separated)</label>
+          <input type="text" id="prodTags" placeholder="4040, BW30, Industrial"/>
+        </div>
+        <div class="form-group full">
+          <label>Short Description * (max 200 chars)</label>
+          <input type="text" id="prodShortDesc" required maxlength="200" placeholder="Brief product description for card view"/>
+        </div>
+        <div class="form-group full">
+          <label>Full Description *</label>
+          <textarea id="prodDesc" required rows="4" placeholder="Detailed product description"></textarea>
+        </div>
+        <div class="form-group full">
+          <label>Product Image</label>
+          <input type="file" id="prodImage" accept="image/*"/>
+        </div>
+        <div class="form-group full">
+          <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;">
+            <input type="checkbox" id="prodActive" checked style="width:auto;"/> Active (visible on website)
+          </label>
+        </div>
+      </div>
+      <div style="display:flex;gap:.75rem;margin-top:1rem;">
+        <button type="submit" class="btn btn-primary">Save Product</button>
+        <button type="button" class="btn btn-outline" onclick="closeModal('productModal')">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/admin.js"></script>
+<script>
+// ── NAVIGATION ──────────────────────────────────────────────────────────
+const pageTitles = {
+  dashboard: 'Dashboard', enquiries: 'Enquiries', products: 'Products',
+  solutions: 'Solutions', industries: 'Industries', brands: 'Brands',
+  resources: 'Resources', banners: 'Hero Banners', herovideo: 'Hero Video', settings: 'Site Settings', account: 'My Account'
+};
+
+function navigate(page) {
+  showSection(`section-${page}`);
+  setActivePage(page);
+  document.getElementById('pageTitle').textContent = pageTitles[page] || page;
+  // Load data for the page
+  if (page === 'dashboard') loadDashboard();
+  else if (page === 'enquiries') loadEnquiries();
+  else if (page === 'products') loadProducts();
+  else if (page === 'solutions') loadSimpleList('solutions');
+  else if (page === 'industries') loadSimpleList('industries');
+  else if (page === 'brands') loadSimpleList('brands');
+  else if (page === 'resources') loadSimpleList('resources');
+  else if (page === 'banners') loadSimpleList('banners');
+  else if (page === 'herovideo') loadHeroVideoPage();
+  else if (page === 'settings') loadSettings();
+}
+
+function openNewSolution(){ openCrud('solutions'); }
+function openNewIndustry(){ openCrud('industries'); }
+function openNewBrand(){ openCrud('brands'); }
+function openNewResource(){ openCrud('resources'); }
+function openNewBanner(){ openCrud('banners'); }
+
+function heroSlotEls(slot){
+  const card = document.querySelector(`[data-hero-slot="${slot}"]`);
+  return {
+    card,
+    wrap: card.querySelector('.hero-video-preview'),
+    el: card.querySelector('.hero-video-el'),
+    fileInput: card.querySelector('.hero-video-file'),
+    urlInput: card.querySelector('.hero-video-url'),
+    status: card.querySelector('.hero-video-status'),
+  };
+}
+async function loadHeroVideoPage(){
+  try {
+    const data = await apiCall('GET', '/settings');
+    for(let slot=1; slot<=4; slot++){
+      const key = slot === 1 ? 'hero_video_url' : `hero_video_url_${slot}`;
+      const url = data && data[key];
+      if(url){
+        heroSlotEls(slot).urlInput.value = url;
+        showHeroPreview(slot, url);
+      }
+    }
+  } catch(e) {}
+}
+function showHeroPreview(slot, url){
+  const { wrap, el, status } = heroSlotEls(slot);
+  const ytM = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+  const vmM = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  wrap.querySelectorAll('iframe').forEach(f => f.remove());
+  if(ytM || vmM){
+    el.style.display = 'none';
+    const src = ytM ? `https://www.youtube.com/embed/${ytM[1]}` : `https://player.vimeo.com/video/${vmM[1]}`;
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.style.cssText = 'width:100%;height:200px;border:0;display:block;';
+    iframe.allow = 'autoplay; fullscreen';
+    wrap.appendChild(iframe);
+  } else {
+    el.style.display = 'block';
+    el.onerror = () => { status.textContent = 'Warning: this URL did not load as a playable video file.'; status.style.color = 'var(--danger, red)'; status.style.display = 'block'; };
+    el.src = url;
+  }
+  wrap.style.display = 'block';
+}
+async function saveHeroVideo(slot){
+  const { fileInput, urlInput, status } = heroSlotEls(slot);
+  const urlVal = urlInput.value.trim();
+  status.style.display = 'none';
+
+  if(fileInput.files[0]){
+    const formData = new FormData();
+    formData.append('hero_video', fileInput.files[0]);
+    formData.append('slot', slot);
+    status.textContent = 'Uploading…';
+    status.style.display = 'block';
+    status.style.color = '#666';
+    try {
+      const res = await apiCall('POST', `/settings/hero-video?slot=${slot}`, formData, true);
+      if (!res || res.error) throw new Error(res?.error || 'Upload failed');
+      showHeroPreview(slot, res.url);
+      urlInput.value = res.url;
+      status.textContent = 'Video uploaded and saved. Refresh the website to see it.';
+      status.style.color = 'var(--success)';
+    } catch(e) {
+      status.textContent = 'Upload failed: ' + (e.message || e);
+      status.style.color = 'var(--danger, red)';
+    }
+    status.style.display = 'block';
+  } else if(urlVal){
+    try {
+      const res = await apiCall('POST', `/settings/hero-video?slot=${slot}`, { url: urlVal, slot });
+      if (!res || res.error) throw new Error(res?.error || 'Save failed');
+      showHeroPreview(slot, urlVal);
+      status.textContent = 'Video URL saved. Refresh the website to see it.';
+      status.style.color = 'var(--success)';
+      status.style.display = 'block';
+    } catch(e) {
+      status.textContent = 'Failed: ' + (e.message || e);
+      status.style.color = 'var(--danger, red)';
+      status.style.display = 'block';
+    }
+  } else {
+    showToast('Please select a video file or enter a URL.','error');
+  }
+}
+async function clearHeroVideo(slot){
+  const { wrap, urlInput, fileInput, status } = heroSlotEls(slot);
+  try {
+    await apiCall('DELETE', `/settings/hero-video?slot=${slot}`);
+  } catch(e) {}
+  urlInput.value = '';
+  fileInput.value = '';
+  wrap.querySelectorAll('iframe').forEach(f => f.remove());
+  wrap.style.display = 'none';
+  status.textContent = 'Video removed.';
+  status.style.color = 'var(--success)';
+  status.style.display = 'block';
+}
+
+// ── INIT ────────────────────────────────────────────────────────────────
+(async () => {
+  const ok = await checkAuth();
+  if (!ok) return;
+  navigate('dashboard');
+  // Show hamburger on mobile
+  if (window.innerWidth <= 900) document.getElementById('menuToggle').style.display = 'block';
+})();
+</script>
+</body>
+</html>
