@@ -60,13 +60,13 @@ app.get('/uploads/:file', (req, res, next) => {
     res.redirect(302, storage.publicUrl(storage.IMAGE_BUCKET, req.params.file));
   } catch (err) { next(err); }
 });
-app.use('/admin',   express.static(path.join(__dirname, '../admin')));
-app.use(express.static(path.join(__dirname, '..'), { dotfiles: 'deny' }));
+app.use('/admin',   express.static(path.join(__dirname, '../public/admin')));
+app.use(express.static(path.join(__dirname, '../public'), { dotfiles: 'deny' }));
 
 // ── FALLBACK HTML ROUTES ─────────────────────────────────────────────────
-app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, '../admin/index.html')));
-app.get('/admin/login', (req, res) => res.sendFile(path.join(__dirname, '../admin/login.html')));
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
+app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, '../public/admin/index.html')));
+app.get('/admin/login', (req, res) => res.sendFile(path.join(__dirname, '../public/admin/login.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
 
 app.use((err, req, res, next) => res.status(err.status || 500).json({ error: err.message || 'Server error' }));
 

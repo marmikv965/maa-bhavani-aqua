@@ -1,23 +1,15 @@
 {
   "framework": null,
+  "outputDirectory": "public",
   "redirects": [
-    { "source": "/backend/:path*", "destination": "/404", "permanent": false },
-    { "source": "/node_modules/:path*", "destination": "/404", "permanent": false },
-    { "source": "/package.json", "destination": "/404", "permanent": false },
-    { "source": "/package-lock.json", "destination": "/404", "permanent": false },
-    { "source": "/vercel.json", "destination": "/404", "permanent": false },
-    { "source": "/admin", "destination": "/admin/", "permanent": true }
+    { "source": "/admin", "destination": "/admin/index.html", "permanent": false }
   ],
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api" },
     { "source": "/uploads/:path*", "destination": "/api" },
-    { "source": "/admin/login", "destination": "/admin/login.html" },
-    { "source": "/:path*", "destination": "/api" }
+    { "source": "/admin/login", "destination": "/admin/login.html" }
   ],
   "functions": {
-    "api/index.js": {
-      "maxDuration": 30,
-      "includeFiles": "{index.html,robots.txt,sitemap.xml,css/**,js/**,images/**,pages/**,admin/**}"
-    }
+    "api/index.js": { "maxDuration": 30 }
   }
 }

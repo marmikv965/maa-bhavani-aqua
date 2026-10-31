@@ -27,7 +27,7 @@ Default: `admin@maabhavaniaqua.com` / `Admin@2025!`
 - `GET /api/settings` (public) `PUT /api/settings` (auth)
 
 ## Deploying on Vercel
-- `api/index.js` exposes `backend/server.js`; `vercel.json` routes `/api/*` and legacy `/uploads/*` to it and serves the static site/admin directly.
+- The static website and admin live in `public/` (served by Vercel directly). `api/index.js` exposes `backend/server.js`; `vercel.json` sends `/api/*` and legacy `/uploads/*` to it.
 - Required env vars (Production): `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `JWT_SECRET`. Optional: `JWT_EXPIRES_IN`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`, `MAIL_TO`, `FRONTEND_URL`.
 - Check `https://<your-domain>/api/health` – it lists the NAMES of any missing variables.
 - The filesystem is read-only on Vercel: uploads go to Supabase Storage, never to `backend/uploads`.
