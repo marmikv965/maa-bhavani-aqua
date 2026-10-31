@@ -1,0 +1,48 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/(?:backend|node_modules|\\.git)(?:/.*)?",
+      "status": 404
+    },
+    {
+      "src": "/(?:package\\.json|package-lock\\.json|vercel\\.json)",
+      "status": 404
+    },
+    {
+      "src": "/(?:.*/)?\\.(?!well-known).*",
+      "status": 404
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/uploads/(.*)",
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/admin",
+      "status": 308,
+      "headers": {
+        "Location": "/admin/"
+      }
+    },
+    {
+      "src": "/admin/",
+      "dest": "/admin/index.html"
+    },
+    {
+      "src": "/admin/login",
+      "dest": "/admin/login.html"
+    },
+    {
+      "handle": "filesystem"
+    }
+  ],
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 30
+    }
+  }
+}

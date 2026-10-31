@@ -2,6 +2,8 @@ const router = require('express').Router();
 const supabase = require('../config/supabase');
 const auth = require('../middleware/auth');
 const upload = require('../middleware/upload');
+const storage = require('../config/storage');
+const { statusFor } = require('../config/env');
 
 router.get('/', async (req, res) => {
   try {
@@ -39,28 +41,36 @@ function toDbFields(input) {
 }
 
 router.post('/', auth, upload.single('image'), async (req, res) => {
+  let uploaded = null;
   try {
     let d = JSON.parse(req.body.data || '{}');
     d = toDbFields(d);
-    if (req.file) d.image = '/uploads/' + req.file.filename;
+    if (req.file) { uploaded = await storage.saveImage(req.file, 'products'); d.image = uploaded.url; }
     if (d.is_active === undefined) d.is_active = true;
     const { data, error } = await supabase.from('products').insert([d]).select().single();
     if (error) throw error;
     res.status(201).json(data);
-  } catch (err) { res.status(400).json({ error: err.message }); }
+  } catch (err) {
+    await storage.removeObject(uploaded); // don't leave an orphaned file if the DB write failed
+    res.status(statusFor(err, 400)).json({ error: err.message });
+  }
 });
 
 router.put('/:id', auth, upload.single('image'), async (req, res) => {
+  let uploaded = null;
   try {
     let d = JSON.parse(req.body.data || '{}');
     d = toDbFields(d);
     ['id','created_at'].forEach(k => delete d[k]);
     d.updated_at = new Date().toISOString();
-    if (req.file) d.image = '/uploads/' + req.file.filename;
+    if (req.file) { uploaded = await storage.saveImage(req.file, 'products'); d.image = uploaded.url; }
     const { data, error } = await supabase.from('products').update(d).eq('id', req.params.id).select().single();
     if (error) throw error;
     res.json(data);
-  } catch (err) { res.status(400).json({ error: err.message }); }
+  } catch (err) {
+    await storage.removeObject(uploaded);
+    res.status(statusFor(err, 400)).json({ error: err.message });
+  }
 });
 
 router.delete('/:id', auth, async (req, res) => {

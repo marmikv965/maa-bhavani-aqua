@@ -431,14 +431,24 @@ async function saveHeroVideo(slot){
   status.style.display = 'none';
 
   if(fileInput.files[0]){
-    const formData = new FormData();
-    formData.append('hero_video', fileInput.files[0]);
-    formData.append('slot', slot);
     status.textContent = 'Uploading…';
     status.style.display = 'block';
     status.style.color = '#666';
     try {
-      const res = await apiCall('POST', `/settings/hero-video?slot=${slot}`, formData, true);
+      // Upload straight to Supabase Storage with a short-lived signed URL (Vercel can't accept large request bodies).
+      const file = fileInput.files[0];
+      const sign = await apiCall('POST', '/settings/hero-video/upload-url', { slot, filename: file.name, contentType: file.type, size: file.size });
+      if (!sign || sign.error) throw new Error(sign?.error || 'Could not start upload');
+      const body = new FormData();
+      body.append('cacheControl', '31536000');
+      body.append('', file);
+      const put = await fetch(sign.signedUrl, { method: 'PUT', body });
+      if (!put.ok) {
+        let detail = '';
+        try { const j = await put.json(); detail = j.message || j.error || ''; } catch (_) {}
+        throw new Error(`Storage upload failed (${put.status}) ${detail}`.trim());
+      }
+      const res = await apiCall('POST', `/settings/hero-video?slot=${slot}`, { url: sign.publicUrl, slot });
       if (!res || res.error) throw new Error(res?.error || 'Upload failed');
       showHeroPreview(slot, res.url);
       urlInput.value = res.url;

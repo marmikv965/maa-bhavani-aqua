@@ -3,8 +3,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const supabase = require('../config/supabase');
 const authMiddleware = require('../middleware/auth');
+const { requireEnv } = require('../config/env');
 
-const sign = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || '7d' });
+const sign = (id) => requireEnv('JWT_SECRET') || jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || '7d' });
 
 router.post('/login', async (req, res) => {
   try {

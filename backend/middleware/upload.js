@@ -1,14 +1,13 @@
 const multer = require('multer');
 const path = require('path');
-const crypto = require('crypto');
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, '../uploads')),
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    cb(null, crypto.randomBytes(12).toString('hex') + ext);
-  }
-});
+// Files are held in memory (no disk writes – Vercel's filesystem is read-only/ephemeral) and the
+// route handlers then push the buffer to Supabase Storage (see config/storage.js).
+// Vercel rejects request bodies larger than ~4.5 MB, so limits are lowered there; large videos
+// use the direct-to-Supabase signed upload instead (POST /api/settings/hero-video/upload-url).
+const IS_VERCEL = !!process.env.VERCEL;
+const MB = 1024 * 1024;
+const storage = multer.memoryStorage();
 
 const imageFilter = (req, file, cb) => {
   const allowed = /jpeg|jpg|png|gif|webp|pdf|svg/;
@@ -22,7 +21,7 @@ const videoFilter = (req, file, cb) => {
   (extOk && mimeOk) ? cb(null, true) : cb(new Error('Only video files are allowed'));
 };
 
-const upload = multer({ storage, fileFilter: imageFilter, limits: { fileSize: 5 * 1024 * 1024 } });
-upload.video = multer({ storage, fileFilter: videoFilter, limits: { fileSize: 100 * 1024 * 1024 } });
+const upload = multer({ storage, fileFilter: imageFilter, limits: { fileSize: (IS_VERCEL ? 4 : 5) * MB } });
+upload.video = multer({ storage, fileFilter: videoFilter, limits: { fileSize: (IS_VERCEL ? 4 : 100) * MB } });
 
 module.exports = upload;

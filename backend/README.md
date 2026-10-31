@@ -26,7 +26,15 @@ Default: `admin@maabhavaniaqua.com` / `Admin@2025!`
 - Same pattern: `/api/solutions` `/api/industries` `/api/banners` `/api/brands` `/api/resources`
 - `GET /api/settings` (public) `PUT /api/settings` (auth)
 
+## Deploying on Vercel
+- `api/index.js` exposes `backend/server.js`; `vercel.json` routes `/api/*` and legacy `/uploads/*` to it and serves the static site/admin directly.
+- Required env vars (Production): `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `JWT_SECRET`. Optional: `JWT_EXPIRES_IN`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`, `MAIL_TO`, `FRONTEND_URL`.
+- Check `https://<your-domain>/api/health` – it lists the NAMES of any missing variables.
+- The filesystem is read-only on Vercel: uploads go to Supabase Storage, never to `backend/uploads`.
+
 ## Notes
-- Hero video upload needs a **public** Supabase Storage bucket named `hero-media`.
+- Storage buckets (both **public**): `hero-media` (hero videos) and `site-uploads` (images/PDFs for products, solutions, industries, banners, brands, resources). Missing buckets are auto-created on first upload.
+- Hero videos are uploaded straight from the browser to Supabase with a signed URL (`POST /api/settings/hero-video/upload-url`), then saved with `POST /api/settings/hero-video`.
+- Old `/uploads/<file>` URLs in the database redirect to `site-uploads/<file>`.
 - Re-run `npm run seed` to overwrite the stored `site_name` setting.
 - Set a strong `JWT_SECRET` in `.env`.

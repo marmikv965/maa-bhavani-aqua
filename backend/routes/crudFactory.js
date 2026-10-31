@@ -2,6 +2,8 @@ const express = require('express');
 const auth = require('../middleware/auth');
 const upload = require('../middleware/upload');
 const supabase = require('../config/supabase');
+const storage = require('../config/storage');
+const { statusFor } = require('../config/env');
 
 const TABLES = {
   solutions:  { order: 'sort_order', file: 'image' },
@@ -19,7 +21,6 @@ module.exports = function crudRouter(table) {
   const parse = (req) => {
     const d = req.body && req.body.data ? JSON.parse(req.body.data) : { ...req.body };
     RESERVED.forEach(k => delete d[k]);
-    if (req.file) d[cfg.file] = '/uploads/' + req.file.filename;
     return d;
   };
 
@@ -48,22 +49,32 @@ module.exports = function crudRouter(table) {
   });
 
   router.post('/', auth, upload.single('image'), async (req, res) => {
+    let uploaded = null;
     try {
       const d = parse(req);
+      if (req.file) { uploaded = await storage.saveImage(req.file, table); d[cfg.file] = uploaded.url; }
       if (d.is_active === undefined) d.is_active = true;
       const { data, error } = await supabase.from(table).insert([d]).select().single();
       if (error) throw error;
       res.status(201).json(data);
-    } catch (err) { res.status(400).json({ error: err.message }); }
+    } catch (err) {
+      await storage.removeObject(uploaded); // don't leave an orphaned file if the DB write failed
+      res.status(statusFor(err, 400)).json({ error: err.message });
+    }
   });
 
   router.put('/:id', auth, upload.single('image'), async (req, res) => {
+    let uploaded = null;
     try {
       const d = parse(req);
+      if (req.file) { uploaded = await storage.saveImage(req.file, table); d[cfg.file] = uploaded.url; }
       const { data, error } = await supabase.from(table).update(d).eq('id', req.params.id).select().single();
       if (error) throw error;
       res.json(data);
-    } catch (err) { res.status(400).json({ error: err.message }); }
+    } catch (err) {
+      await storage.removeObject(uploaded);
+      res.status(statusFor(err, 400)).json({ error: err.message });
+    }
   });
 
   router.delete('/:id', auth, async (req, res) => {
