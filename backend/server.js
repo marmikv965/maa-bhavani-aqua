@@ -47,7 +47,7 @@ app.get('/api/health', (req, res) => {
 app.use((req, res, next) => {
   let p = req.path;
   try { p = decodeURIComponent(p); } catch { return res.status(400).end(); }
-  if (/^\/backend(\/|$)/i.test(p) || /(^|\/)\./.test(p)) return res.status(404).end();
+  if (/^\/(backend|node_modules|api\/index\.js|package(-lock)?\.json|vercel\.json)(\/|$)/i.test(p) || /(^|\/)\./.test(p)) return res.status(404).end();
   next();
 });
 // Legacy local files (only present when running locally with an old backend/uploads folder).

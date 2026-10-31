@@ -1,48 +1,23 @@
 {
-  "version": 2,
-  "routes": [
-    {
-      "src": "/(?:backend|node_modules|\\.git)(?:/.*)?",
-      "status": 404
-    },
-    {
-      "src": "/(?:package\\.json|package-lock\\.json|vercel\\.json)",
-      "status": 404
-    },
-    {
-      "src": "/(?:.*/)?\\.(?!well-known).*",
-      "status": 404
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index.js"
-    },
-    {
-      "src": "/uploads/(.*)",
-      "dest": "/api/index.js"
-    },
-    {
-      "src": "/admin",
-      "status": 308,
-      "headers": {
-        "Location": "/admin/"
-      }
-    },
-    {
-      "src": "/admin/",
-      "dest": "/admin/index.html"
-    },
-    {
-      "src": "/admin/login",
-      "dest": "/admin/login.html"
-    },
-    {
-      "handle": "filesystem"
-    }
+  "framework": null,
+  "redirects": [
+    { "source": "/backend/:path*", "destination": "/404", "permanent": false },
+    { "source": "/node_modules/:path*", "destination": "/404", "permanent": false },
+    { "source": "/package.json", "destination": "/404", "permanent": false },
+    { "source": "/package-lock.json", "destination": "/404", "permanent": false },
+    { "source": "/vercel.json", "destination": "/404", "permanent": false },
+    { "source": "/admin", "destination": "/admin/", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api" },
+    { "source": "/uploads/:path*", "destination": "/api" },
+    { "source": "/admin/login", "destination": "/admin/login.html" },
+    { "source": "/:path*", "destination": "/api" }
   ],
   "functions": {
     "api/index.js": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "{index.html,robots.txt,sitemap.xml,css/**,js/**,images/**,pages/**,admin/**}"
     }
   }
 }
